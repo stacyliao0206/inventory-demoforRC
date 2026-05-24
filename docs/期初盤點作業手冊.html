@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>期初盤點作業手冊 · Numeracy Lab</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm 18mm 16mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    font-family: "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+    color: #0f172a;
+    font-size: 11.5pt;
+    line-height: 1.65;
+    background: #fafaf9;
+  }
+  body { max-width: 210mm; margin: 0 auto; padding: 16mm; }
+  @media print { body { padding: 0; background: white; } .no-print { display: none; } .section { box-shadow: none; } }
+
+  .cover {
+    text-align: center;
+    padding: 35mm 0 15mm;
+    page-break-after: always;
+  }
+  .cover h1 { font-size: 26pt; font-weight: 700; margin-bottom: 6mm; letter-spacing: 2pt; }
+  .cover .sub { font-size: 13pt; color: #64748b; margin-bottom: 14mm; }
+  .cover .badge {
+    display: inline-block;
+    background: #059669;
+    color: white;
+    padding: 2mm 6mm;
+    border-radius: 20pt;
+    font-size: 11pt;
+    margin-bottom: 12mm;
+  }
+  .cover .intro {
+    text-align: left;
+    max-width: 145mm;
+    margin: 0 auto;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 4pt;
+    padding: 10mm 14mm;
+    font-size: 11pt;
+    line-height: 1.8;
+  }
+  .cover .intro h3 { font-size: 12pt; margin-bottom: 3mm; color: #0f172a; }
+  .cover .intro p { color: #334155; margin-bottom: 3mm; }
+  .cover .meta { margin-top: 14mm; font-size: 10pt; color: #94a3b8; }
+
+  .section {
+    page-break-before: always;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 4pt;
+    padding: 10mm 14mm;
+    margin-bottom: 8mm;
+  }
+  .section:first-of-type { page-break-before: auto; }
+
+  h2 {
+    font-size: 18pt;
+    font-weight: 700;
+    padding-bottom: 3mm;
+    margin-bottom: 5mm;
+    border-bottom: 2px solid #0f172a;
+  }
+  h2 .week {
+    display: inline-block;
+    background: #0f172a;
+    color: white;
+    padding: 1mm 4mm;
+    border-radius: 2pt;
+    font-size: 11pt;
+    margin-right: 4mm;
+    vertical-align: middle;
+  }
+
+  h3 {
+    font-size: 13pt;
+    font-weight: 600;
+    margin: 6mm 0 2mm;
+  }
+  h3::before {
+    content: "▸ ";
+    color: #059669;
+  }
+
+  p { margin-bottom: 2mm; }
+  ol, ul { padding-left: 6mm; margin-bottom: 3mm; }
+  li { margin-bottom: 1.5mm; }
+
+  .timeline {
+    margin: 4mm 0 6mm;
+    padding: 4mm 5mm;
+    background: #f8fafc;
+    border-radius: 3pt;
+    font-size: 10.5pt;
+  }
+  .timeline strong { color: #0f172a; }
+
+  .day-box {
+    border: 1px solid #e2e8f0;
+    border-left: 4px solid #059669;
+    padding: 4mm 5mm;
+    margin: 2mm 0;
+    background: white;
+    border-radius: 0 2pt 2pt 0;
+  }
+  .day-box .day-label {
+    font-size: 10pt;
+    color: #64748b;
+    margin-bottom: 1mm;
+  }
+  .day-box .day-title {
+    font-weight: 600;
+    font-size: 12pt;
+    margin-bottom: 2mm;
+  }
+  .day-box ol { margin: 2mm 0 0; font-size: 10.5pt; }
+  .day-box ol li { margin-bottom: 1mm; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 3mm 0;
+    font-size: 10.5pt;
+  }
+  th, td {
+    border: 1px solid #e2e8f0;
+    padding: 2mm 3mm;
+    text-align: left;
+    vertical-align: top;
+  }
+  th { background: #f1f5f9; font-weight: 600; }
+  .num { text-align: right; }
+
+  .callout {
+    background: #fef3c7;
+    border-left: 4px solid #d97706;
+    padding: 3mm 5mm;
+    margin: 3mm 0;
+    font-size: 10.5pt;
+    border-radius: 0 2pt 2pt 0;
+  }
+  .callout strong { color: #92400e; }
+
+  .callout-info {
+    background: #dbeafe;
+    border-left-color: #2563eb;
+  }
+  .callout-info strong { color: #1e3a8a; }
+
+  .callout-danger {
+    background: #fee2e2;
+    border-left-color: #dc2626;
+  }
+  .callout-danger strong { color: #991b1b; }
+
+  .checklist li {
+    list-style: none;
+    padding-left: 6mm;
+    position: relative;
+    margin-bottom: 2mm;
+  }
+  .checklist li::before {
+    content: "☐";
+    position: absolute;
+    left: 0;
+    font-size: 13pt;
+    color: #64748b;
+  }
+
+  .form-template {
+    background: white;
+    border: 2px solid #0f172a;
+    border-radius: 2pt;
+    padding: 4mm;
+    margin: 4mm 0;
+  }
+  .form-template .form-title {
+    background: #0f172a;
+    color: white;
+    padding: 2mm 4mm;
+    margin: -4mm -4mm 3mm;
+    font-weight: 600;
+    font-size: 11pt;
+  }
+  .form-template table { font-size: 9.5pt; }
+  .form-template th { background: #f1f5f9; font-size: 9pt; }
+
+  .sig-block {
+    margin-top: 8mm;
+    display: flex;
+    gap: 10mm;
+    font-size: 10pt;
+  }
+  .sig-block .sig {
+    flex: 1;
+    border-top: 1px solid #0f172a;
+    padding-top: 2mm;
+    text-align: center;
+    color: #64748b;
+  }
+
+  .no-print {
+    position: fixed;
+    top: 8mm;
+    right: 8mm;
+    background: #0f172a;
+    color: white;
+    padding: 3mm 6mm;
+    border-radius: 3pt;
+    cursor: pointer;
+    font-size: 10pt;
+    box-shadow: 0 2pt 4pt rgba(0,0,0,0.1);
+  }
+</style>
+</head>
+<body>
+
+<button class="no-print" onclick="window.print()">列印為 PDF</button>
+
+<div class="cover">
+  <div class="badge">給助理的作業手冊</div>
+  <h1>期初盤點作業手冊</h1>
+  <div class="sub">Numeracy Lab 行政部 · 2026 庫存系統啟動</div>
+
+  <div class="intro">
+    <h3>這本手冊是什麼？</h3>
+    <p>為了讓新的庫存管理系統上線，我們要先把目前 4 個倉庫裡的所有教材 <strong>數清楚、寫下來</strong>。這個動作叫「期初盤點」。</p>
+    <p>這不是在找錯，是把「現在有什麼、在哪裡、多少」變成我們系統的起點。做完一次，之後就不用再憑印象猜了。</p>
+    <h3>這本手冊怎麼用？</h3>
+    <p>從 Week 1 開始，按步驟走。每一天該做什麼、怎麼記錄、遇到問題找誰，都寫在裡面。不懂就問主管，不要自己猜。</p>
+  </div>
+
+  <div class="meta">版本 v1.0 · 適用 2026 年 5 月期初盤點 · 主責：倉儲 A、倉儲 B</div>
+</div>
+
+<!-- 全貌 -->
+<section class="section">
+  <h2>整體規劃：3 週完成</h2>
+
+  <div class="timeline">
+    <strong>盤點窗口：</strong>2026 年 5 月第 1 週～第 3 週（建議安排在 5/4 ~ 5/22，避開夏令營到貨）<br>
+    <strong>窗口條件：</strong>盤點期間，該倉點「只進不出」或「完全凍結」，避免一邊盤一邊動
+  </div>
+
+  <h3>三週分工表</h3>
+  <table>
+    <tr><th>時程</th><th>任務</th><th>主責</th><th>產出</th></tr>
+    <tr><td>Week 1（5/4-5/8）</td><td>整理 SKU 清單、準備盤點表、編儲位</td><td>倉儲 A + 主管</td><td>SKU 主檔 v0、盤點表 v0</td></tr>
+    <tr><td>Week 2（5/11-5/15）</td><td>四倉分批盤點</td><td>倉儲 A + B 雙人</td><td>4 份盤點表、照片記錄</td></tr>
+    <tr><td>Week 3（5/18-5/22）</td><td>匯整、對帳、呆滯決議、匯入系統</td><td>倉儲 A + 主管</td><td>期初庫存快照</td></tr>
+  </table>
+
+  <h3>需要準備的工具（Week 1 前備齊）</h3>
+  <ul class="checklist">
+    <li>筆電或平板（可開 Google Sheets）</li>
+    <li>手機（拍照記錄現況）</li>
+    <li>紙本盤點表（本手冊後附模板，可影印）</li>
+    <li>簽字筆、螢光筆、計算機</li>
+    <li>箱標籤紙（貼標用，80 x 40 mm 建議）</li>
+    <li>美工刀、膠帶、垃圾袋（清出破損品用）</li>
+    <li>一雙手套、口罩（久未動的舊倉灰塵多）</li>
+  </ul>
+
+  <div class="callout">
+    <strong>重要原則：</strong>盤點要「兩人一組」。一個人唱數、一個人登錄。不要一個人邊數邊寫，會漏、會錯。
+  </div>
+</section>
+
+<!-- Week 1 -->
+<section class="section">
+  <h2><span class="week">Week 1</span>準備階段</h2>
+
+  <div class="day-box">
+    <div class="day-label">Day 1 · 週一</div>
+    <div class="day-title">和主管一起列出活躍 SKU 清單</div>
+    <ol>
+      <li>主管提供近 2 年仍在使用的教材名單（預估 100–200 個 SKU）</li>
+      <li>依【SKU 命名規則】給每個教材一個唯一編號（範例見下方）</li>
+      <li>逐項填入 Google Sheets「SKU 主檔」表</li>
+      <li>還沒決定安全庫存？先留空，Week 3 再回來補</li>
+    </ol>
+  </div>
+
+  <div class="day-box">
+    <div class="day-label">Day 2 · 週二</div>
+    <div class="day-title">產出紙本盤點表</div>
+    <ol>
+      <li>依 SKU 主檔，產出各倉的盤點表（本手冊最後有空白模板）</li>
+      <li>每個倉一份獨立的盤點表，依「預計擺放位置」排序（例如先印刷品類、再零散材料）</li>
+      <li>影印至少 2 份（工作 1 份、備份 1 份）</li>
+    </ol>
+  </div>
+
+  <div class="day-box">
+    <div class="day-label">Day 3 · 週三</div>
+    <div class="day-title">初步規劃儲位編碼（先走一次倉看狀況）</div>
+    <ol>
+      <li>去深坑倉、公司儲藏室現場看目前的擺放狀況</li>
+      <li>按「倉-區-架-層」4 碼編碼（範例：SK-A-03-2）</li>
+      <li>拍下現況照片，記下「哪些東西看起來像呆滯/停產」給主管</li>
+    </ol>
+  </div>
+
+  <div class="day-box">
+    <div class="day-label">Day 4-5 · 週四-週五</div>
+    <div class="day-title">和物流倉聯絡、排定盤點時間</div>
+    <ol>
+      <li>聯絡信利達、林口物流倉窗口，告知「5 月某日要實盤」</li>
+      <li>請對方提供目前的帳面庫存清單（作為我們對照用）</li>
+      <li>確認對方是否可配合「盤點當日凍結出貨」</li>
+    </ol>
+  </div>
+
+  <h3>SKU 命名規則（建議）</h3>
+  <table>
+    <tr><th>首碼</th><th>意義</th><th>範例</th></tr>
+    <tr><td>A</td><td>主力教材（營隊用）</td><td>A101、A102</td></tr>
+    <tr><td>B</td><td>長尾教材（外售、小課本）</td><td>B201、B202</td></tr>
+    <tr><td>C</td><td>零散材料（木片、貼紙、風箏線）</td><td>C301、C302</td></tr>
+  </table>
+
+  <div class="callout-info callout">
+    <strong>小技巧：</strong>編號不必一次編完。Week 1 可以先給主力品項編，其他可在盤點現場邊盤邊編，不用卡住進度。
+  </div>
+</section>
+
+<!-- Week 2 -->
+<section class="section">
+  <h2><span class="week">Week 2</span>現場盤點</h2>
+
+  <h3>四倉盤點順序（由近至遠）</h3>
+  <div class="timeline">
+    <strong>週一：</strong>公司儲藏室（半天）<br>
+    <strong>週二：</strong>深坑倉庫（1 天，量最大）<br>
+    <strong>週三：</strong>信利達物流倉庫（半天，請對方協助）<br>
+    <strong>週四：</strong>林口物流倉庫（半天）<br>
+    <strong>週五：</strong>保留緩衝 + 收尾
+  </div>
+
+  <h3>每一倉的盤點步驟（都適用）</h3>
+
+  <div class="day-box">
+    <div class="day-title">Step 1 · 抵達現場，拍全景照</div>
+    <ol>
+      <li>拍下該倉「盤點前」整體照片 2–3 張（作為起點證據）</li>
+      <li>開盤點表，寫下今日日期、盤點人 A/B 姓名</li>
+    </ol>
+  </div>
+
+  <div class="day-box">
+    <div class="day-title">Step 2 · 分區塊逐一清點</div>
+    <ol>
+      <li>A 人：打開每一箱、唸出「SKU、版次、數量」</li>
+      <li>B 人：在盤點表上找到那個 SKU，把數量寫進「實際數」欄</li>
+      <li>遇到盤點表上沒有的品項？不要跳過！手寫在表格最下方，備註「未登錄品項」</li>
+      <li>每完成一個區塊，A、B 互換角色，從另一頭複盤一次</li>
+    </ol>
+  </div>
+
+  <div class="day-box">
+    <div class="day-title">Step 3 · 特殊狀況處理</div>
+    <ul>
+      <li><strong>破損：</strong>另外放一疊，備註「破損 X 本」，不計入實際數</li>
+      <li><strong>已停產但還在：</strong>記下數量，備註「停產待決議」</li>
+      <li><strong>拆散單本：</strong>湊成整箱才算，或分開記（整箱 X 箱 + 散本 Y 本）</li>
+      <li><strong>顏色/規格變異：</strong>分別計數（如「紅色木片 120 / 黃色木片 80」）</li>
+    </ul>
+  </div>
+
+  <div class="day-box">
+    <div class="day-title">Step 4 · 收尾</div>
+    <ol>
+      <li>兩人簽名確認盤點表完成</li>
+      <li>將紙本盤點表拍照存檔</li>
+      <li>當日晚上輸入到 Google Sheets【盤點紀錄】表</li>
+      <li>拍下該倉「盤點後」照片（整理過的狀態）</li>
+    </ol>
+  </div>
+
+  <div class="callout callout-danger">
+    <strong>禁止：</strong>憑印象估數（「大概有 200 本」不可以）、跳過難數的品項（就算要倒整袋重算也要數）、當天不登錄 Sheets（隔夜記憶會失真）。
+  </div>
+
+  <h3>物流倉盤點的額外注意</h3>
+  <ul>
+    <li>提前聯絡對方窗口，請他們指派人員陪同</li>
+    <li>比對對方「帳面庫存」vs 我們實盤，差異當場記錄</li>
+    <li>請對方補一張「盤點證明單」給我們（蓋章）</li>
+  </ul>
+</section>
+
+<!-- Week 3 -->
+<section class="section">
+  <h2><span class="week">Week 3</span>匯整與上線</h2>
+
+  <div class="day-box">
+    <div class="day-label">Day 1 · 週一</div>
+    <div class="day-title">四倉資料彙整</div>
+    <ol>
+      <li>把 4 份盤點表的結果，統整到一個總表（Google Sheets 新分頁）</li>
+      <li>每個 SKU 的 4 倉數字加總 = 期初庫存</li>
+      <li>發現漏盤或矛盾的品項？列成清單，Day 2 補盤</li>
+    </ol>
+  </div>
+
+  <div class="day-box">
+    <div class="day-label">Day 2 · 週二</div>
+    <div class="day-title">呆滯品主管會議</div>
+    <ol>
+      <li>和主管一起看彙整表，標記以下三類：
+        <ul>
+          <li>停產但仍有庫存 → 建議處置方案</li>
+          <li>疑似呆滯（看不出何時入庫）→ 決議保留/處理</li>
+          <li>破損 → 確認是否銷毀</li>
+        </ul>
+      </li>
+      <li>主管簽核決議清單</li>
+    </ol>
+  </div>
+
+  <div class="day-box">
+    <div class="day-label">Day 3 · 週三</div>
+    <div class="day-title">正式匯入系統</div>
+    <ol>
+      <li>在【庫存交易】表，為每個 SKU × 每個倉的期初數量，建立一筆「入庫」紀錄
+        <ul>
+          <li>日期：盤點完成日（統一用 5/20）</li>
+          <li>類型：入庫</li>
+          <li>目的倉：對應倉點代碼</li>
+          <li>數量：實盤數</li>
+          <li>對應事件：期初盤點</li>
+          <li>登錄人：姓名</li>
+        </ul>
+      </li>
+      <li>完成後核對【SKU 主檔】的「目前庫存」欄（自動公式）是否與盤點表一致</li>
+    </ol>
+  </div>
+
+  <div class="day-box">
+    <div class="day-label">Day 4 · 週四</div>
+    <div class="day-title">設定安全庫存</div>
+    <ol>
+      <li>和主管一起決定每個 A 類品項的安全庫存
+        <ul>
+          <li>公式：預估營期需求（學生數 × 80%）× 1.1 緩衝</li>
+          <li>例：夏令營 4000 人的品項 → 4000 × 80% × 1.1 ≈ 3520</li>
+        </ul>
+      </li>
+      <li>B、C 類可以先寫 0（不設門檻），之後再調</li>
+    </ol>
+  </div>
+
+  <div class="day-box">
+    <div class="day-label">Day 5 · 週五</div>
+    <div class="day-title">啟動儀表板</div>
+    <ol>
+      <li>打開網站儀表板，確認紅燈/黃燈品項清單合理</li>
+      <li>若有品項警示誤判，回頭調整安全庫存</li>
+      <li>主管看過一次，確認上線</li>
+      <li>倉儲 A、B 從下週一起正式採用新系統，舊 Excel 封存</li>
+    </ol>
+  </div>
+
+  <div class="callout callout-info">
+    <strong>恭喜：</strong>做完這 3 週，系統就有了可靠的起點。之後每天只需花 5 分鐘登錄異動，就能維持帳實一致。
+  </div>
+</section>
+
+<!-- 盤點表模板 -->
+<section class="section">
+  <h2>附錄：紙本盤點表模板</h2>
+
+  <div class="form-template">
+    <div class="form-title">倉別：____________ 盤點日：__________ 盤點人：______ / ______</div>
+    <table>
+      <tr>
+        <th style="width:10%">SKU</th>
+        <th style="width:26%">品名</th>
+        <th style="width:8%">版次</th>
+        <th style="width:8%" class="num">箱數</th>
+        <th style="width:8%" class="num">每箱</th>
+        <th style="width:8%" class="num">散本</th>
+        <th style="width:10%" class="num">實際總數</th>
+        <th style="width:22%">備註</th>
+      </tr>
+      <tr style="height: 8mm"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr style="height: 8mm"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr style="height: 8mm"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr style="height: 8mm"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr style="height: 8mm"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr style="height: 8mm"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr style="height: 8mm"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr style="height: 8mm"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr style="height: 8mm"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr style="height: 8mm"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    </table>
+    <p style="font-size: 9pt; color: #64748b; margin-top: 3mm;">* 實際總數 = 箱數 × 每箱 + 散本</p>
+  </div>
+
+  <div class="sig-block">
+    <div class="sig">盤點人 A 簽章</div>
+    <div class="sig">盤點人 B 簽章</div>
+    <div class="sig">主管簽核</div>
+  </div>
+
+  <h3 style="margin-top:10mm">遇到問題找誰？</h3>
+  <table>
+    <tr><th>問題類型</th><th>找誰</th></tr>
+    <tr><td>盤點表上沒這個 SKU</td><td>先手寫，等 Week 3 主管決議</td></tr>
+    <tr><td>破損品怎麼處理</td><td>先另外放，Week 3 會議決議</td></tr>
+    <tr><td>物流倉對方人員不配合</td><td>Line 通知主管，由主管協調</td></tr>
+    <tr><td>系統登錄出錯</td><td>截圖、備註原因，不要硬刪</td></tr>
+    <tr><td>其他疑問</td><td>主管（隨時 Line）</td></tr>
+  </table>
+</section>
+
+</body>
+</html>

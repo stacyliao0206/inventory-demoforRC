@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>SKU 編碼規則 SOP · Numeracy Lab</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm 18mm 16mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    font-family: "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+    color: #0f172a;
+    font-size: 11.5pt;
+    line-height: 1.65;
+    background: #fafaf9;
+  }
+  body { max-width: 210mm; margin: 0 auto; padding: 16mm; }
+  @media print { body { padding: 0; background: white; } .no-print { display: none; } .section { box-shadow: none; } }
+
+  .cover { text-align: center; padding: 35mm 0 15mm; page-break-after: always; }
+  .cover h1 { font-size: 26pt; font-weight: 700; margin-bottom: 6mm; letter-spacing: 2pt; }
+  .cover .sub { font-size: 13pt; color: #64748b; margin-bottom: 14mm; }
+  .cover .badge {
+    display: inline-block;
+    background: #4f46e5;
+    color: white;
+    padding: 2mm 6mm;
+    border-radius: 20pt;
+    font-size: 11pt;
+    margin-bottom: 12mm;
+  }
+  .cover .intro {
+    text-align: left;
+    max-width: 145mm;
+    margin: 0 auto;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 4pt;
+    padding: 10mm 14mm;
+    font-size: 11pt;
+    line-height: 1.8;
+  }
+  .cover .intro h3 { font-size: 12pt; margin-bottom: 3mm; color: #0f172a; }
+  .cover .intro p { color: #334155; margin-bottom: 3mm; }
+  .cover .meta { margin-top: 14mm; font-size: 10pt; color: #94a3b8; }
+
+  .section {
+    page-break-before: always;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 4pt;
+    padding: 10mm 14mm;
+    margin-bottom: 8mm;
+  }
+  .section:first-of-type { page-break-before: auto; }
+
+  h2 {
+    font-size: 18pt;
+    font-weight: 700;
+    padding-bottom: 3mm;
+    margin-bottom: 5mm;
+    border-bottom: 2px solid #0f172a;
+  }
+  h2 .num {
+    display: inline-block;
+    background: #4f46e5;
+    color: white;
+    padding: 1mm 4mm;
+    border-radius: 2pt;
+    font-size: 11pt;
+    margin-right: 4mm;
+    vertical-align: middle;
+  }
+
+  h3 { font-size: 13pt; font-weight: 600; margin: 6mm 0 2mm; }
+  h3::before { content: "▸ "; color: #4f46e5; }
+
+  p { margin-bottom: 2mm; }
+  ol, ul { padding-left: 6mm; margin-bottom: 3mm; }
+  li { margin-bottom: 1.5mm; }
+
+  table { width: 100%; border-collapse: collapse; margin: 3mm 0; font-size: 10.5pt; }
+  th, td { border: 1px solid #e2e8f0; padding: 2.5mm 3mm; text-align: left; vertical-align: top; }
+  th { background: #f1f5f9; font-weight: 600; }
+  .num { text-align: right; }
+  .center { text-align: center; }
+
+  .callout {
+    background: #fef3c7;
+    border-left: 4px solid #d97706;
+    padding: 3mm 5mm;
+    margin: 3mm 0;
+    font-size: 10.5pt;
+    border-radius: 0 2pt 2pt 0;
+  }
+  .callout strong { color: #92400e; }
+  .callout-info { background: #dbeafe; border-left-color: #2563eb; }
+  .callout-info strong { color: #1e3a8a; }
+  .callout-success { background: #d1fae5; border-left-color: #059669; }
+  .callout-success strong { color: #065f46; }
+  .callout-danger { background: #fee2e2; border-left-color: #dc2626; }
+  .callout-danger strong { color: #991b1b; }
+
+  .form-sample {
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    padding: 3mm 4mm;
+    border-radius: 2pt;
+    font-family: ui-monospace, "SFMono-Regular", monospace;
+    font-size: 9.5pt;
+    color: #334155;
+    margin: 2mm 0;
+  }
+
+  .pill {
+    display: inline-block;
+    padding: 1mm 3mm;
+    border-radius: 10pt;
+    font-size: 9.5pt;
+    font-weight: 500;
+  }
+  .pill-finished { background: #e0e7ff; color: #3730a3; }
+  .pill-component { background: #cffafe; color: #155e75; }
+  .pill-raw { background: #fef9c3; color: #854d0e; }
+  .pill-letter {
+    display: inline-block;
+    background: #4f46e5;
+    color: white;
+    padding: 1mm 3mm;
+    border-radius: 3pt;
+    font-family: ui-monospace, monospace;
+    font-weight: 700;
+    font-size: 11pt;
+    min-width: 8mm;
+    text-align: center;
+  }
+
+  .sig-block { margin-top: 8mm; display: flex; gap: 10mm; font-size: 10pt; }
+  .sig-block .sig { flex: 1; border-top: 1px solid #0f172a; padding-top: 2mm; text-align: center; color: #64748b; }
+
+  .no-print {
+    position: fixed;
+    top: 8mm;
+    right: 8mm;
+    background: #4f46e5;
+    color: white;
+    padding: 3mm 6mm;
+    border-radius: 3pt;
+    cursor: pointer;
+    font-size: 10pt;
+    box-shadow: 0 2pt 4pt rgba(0,0,0,0.1);
+  }
+
+  .step-box {
+    background: #f8fafc;
+    border-left: 3px solid #4f46e5;
+    padding: 3mm 5mm;
+    margin-bottom: 3mm;
+    border-radius: 0 2pt 2pt 0;
+  }
+  .step-box .step-title { font-weight: 600; margin-bottom: 1mm; }
+</style>
+</head>
+<body>
+
+<button class="no-print" onclick="window.print()">列印為 PDF</button>
+
+<div class="cover">
+  <div class="badge">給編碼負責人的速查手冊</div>
+  <h1>SKU 編碼規則 SOP</h1>
+  <div class="sub">Numeracy Lab 行政部 · 庫存管理品項編碼標準</div>
+
+  <div class="intro">
+    <h3>這份手冊在做什麼？</h3>
+    <p>為公司所有教材、教具、原料、行政用品**建立一致的編碼規則**。讓任何人看到一個 SKU 編號，就知道它是什麼類別、是成品還是元件、屬於哪個探索包。</p>
+    <h3>為什麼編碼規則要統一？</h3>
+    <p>編碼一旦混亂，盤點會出錯、採購會重複下單、庫存系統的計算會失真。統一規則 = 庫存可靠度的根本。</p>
+    <h3>誰要用這份？</h3>
+    <p>新增 SKU 的負責人（千惠 + 主管 + 未來新人）。每次新增前先翻這份對照表，確認編碼正確。</p>
+  </div>
+
+  <div class="meta">版本 v1.0 · 適用 2026 年起新編碼系統</div>
+</div>
+
+<!-- 1. 三類型 -->
+<section class="section">
+  <h2><span class="num">1</span>三種類型：成品 / 元件 / 通用材料</h2>
+
+  <h3>三分法定義</h3>
+  <table>
+    <tr><th style="width:18%">類型</th><th style="width:32%">意義</th><th>範例</th></tr>
+    <tr>
+      <td><span class="pill pill-finished">成品</span></td>
+      <td>可單獨販售或交付給客戶 / 學生</td>
+      <td>整套風箏探索包、思考課題本、書籍、徽章、招生 DM、七巧板</td>
+    </tr>
+    <tr>
+      <td><span class="pill pill-component">元件</span></td>
+      <td>成品的拆解部件，會被組裝成成品</td>
+      <td>風箏_學習日誌、風箏_棉線、風箏_麻繩、直線花_花</td>
+    </tr>
+    <tr>
+      <td><span class="pill pill-raw">通用材料</span></td>
+      <td>行政耗材，會被消耗、不屬於任何成品</td>
+      <td>剪刀、衛生紙、影印紙、OK 蹦</td>
+    </tr>
+  </table>
+
+  <div class="callout callout-info">
+    <strong>判斷流程：</strong><br>
+    1. 這個東西能直接給客戶 / 學生用嗎？→ 是 → <strong>成品</strong><br>
+    2. 是某個成品的零件嗎？→ 是 → <strong>元件</strong><br>
+    3. 都不是，是辦公室用的？→ <strong>通用材料</strong>
+  </div>
+</section>
+
+<!-- 2. 9 大類別字母 -->
+<section class="section">
+  <h2><span class="num">2</span>9 大類別字母（必背）</h2>
+
+  <table>
+    <tr><th class="center" style="width:8%">字母</th><th style="width:18%">類別</th><th style="width:36%">編碼格式</th><th>範例</th></tr>
+    <tr>
+      <td class="center"><span class="pill-letter">A</span></td>
+      <td>探索包</td>
+      <td><strong>A-XX-000</strong>（整套，成品）<br><strong>A-XX-001+</strong>（元件）</td>
+      <td>A-KT-000 風箏探索包<br>A-KT-001 風箏_學習日誌</td>
+    </tr>
+    <tr>
+      <td class="center"><span class="pill-letter">B</span></td>
+      <td>小專題</td>
+      <td><strong>B-XX-000</strong> / <strong>B-XX-001+</strong></td>
+      <td>B-LF-000 直線花<br>B-LF-001 直線花_花</td>
+    </tr>
+    <tr>
+      <td class="center"><span class="pill-letter">C</span></td>
+      <td>思考課</td>
+      <td><strong>C-001</strong> 起跳</td>
+      <td>C-001 思考課題本-基礎</td>
+    </tr>
+    <tr>
+      <td class="center"><span class="pill-letter">D</span></td>
+      <td>題本書籍</td>
+      <td><strong>D-001</strong> 起跳</td>
+      <td>D-001 億萬億顆星星</td>
+    </tr>
+    <tr>
+      <td class="center"><span class="pill-letter">F</span></td>
+      <td>行政文具</td>
+      <td><strong>F-001</strong> 起跳</td>
+      <td>F-001 剪刀<br>F-002 影印紙<br>F-003 衛生紙<br>F-004 OK 蹦</td>
+    </tr>
+    <tr>
+      <td class="center"><span class="pill-letter">G</span></td>
+      <td>文創禮品</td>
+      <td><strong>G-001</strong> 起跳</td>
+      <td>G-001 NUMI 金屬造型徽章</td>
+    </tr>
+    <tr>
+      <td class="center"><span class="pill-letter">M</span></td>
+      <td>行銷文宣</td>
+      <td><strong>M-001</strong> 起跳</td>
+      <td>M-001 夏令營招生 DM<br>M-002 海報</td>
+    </tr>
+    <tr>
+      <td class="center"><span class="pill-letter">R</span></td>
+      <td>教具材料</td>
+      <td><strong>R-001</strong> 起跳</td>
+      <td>R-001 七巧板<br>R-002 大骰子<br>R-003 軌道車</td>
+    </tr>
+    <tr>
+      <td class="center"><span class="pill-letter">E</span></td>
+      <td>其它</td>
+      <td><strong>E-001</strong> 起跳</td>
+      <td>E-001 雜項</td>
+    </tr>
+  </table>
+
+  <div class="callout callout-info">
+    <strong>記憶方法：</strong>
+    A 探索包是核心商品所以放第一個；B 是小專題（Brief）；
+    C-D-E-F-G 連著按字母順序（思考課/題本書籍/其它/行政文具/文創）；
+    M 是 Marketing 行銷；R 是 Resource 教具
+  </div>
+</section>
+
+<!-- 3. A B 主題碼 -->
+<section class="section">
+  <h2><span class="num">3</span>A、B 類的 XX 主題碼怎麼編</h2>
+
+  <p>A 探索包和 B 小專題編碼中間的 <strong>XX</strong> 是 2 個英文字母縮寫，代表這個主題。</p>
+
+  <h3>命名原則</h3>
+  <ol>
+    <li>取主題的 <strong>英文名稱</strong>，挑首字母或關鍵字母</li>
+    <li>避開已用過的縮寫（先到「編碼規則」分頁查現有清單）</li>
+    <li>2 個字母即可，不要 3 個</li>
+    <li>大寫</li>
+  </ol>
+
+  <h3>已使用的主題碼（沿用千惠草稿）</h3>
+  <table>
+    <tr><th>類別</th><th>主題碼</th><th>主題</th></tr>
+    <tr><td>A 探索包</td><td>KT</td><td>風箏（Kite）</td></tr>
+    <tr><td>A 探索包</td><td>DO</td><td>都市規劃（Downtown）</td></tr>
+    <tr><td>A 探索包</td><td>RB</td><td>塗鴉機器人（Robot）</td></tr>
+    <tr><td>A 探索包</td><td>MA</td><td>迷宮（Maze）</td></tr>
+    <tr><td>A 探索包</td><td>PB</td><td>彈珠台（Pinball）</td></tr>
+    <tr><td>A 探索包</td><td>ST</td><td>曲線刺繡（Stitch）</td></tr>
+    <tr><td>A 探索包</td><td>IL</td><td>伊斯蘭藝術燈（Islamic Lamp）</td></tr>
+    <tr><td>A 探索包</td><td>CP</td><td>密碼筒（Cipher）</td></tr>
+    <tr><td>A 探索包</td><td>CL</td><td>萬年曆（Calendar）</td></tr>
+    <tr><td>A 探索包</td><td>SG</td><td>單弦琴（String）</td></tr>
+    <tr><td>A 探索包</td><td>AI</td><td>AI 機器人</td></tr>
+    <tr><td>A 探索包</td><td>KM</td><td>3D 萬花筒（Kaleidoscope）</td></tr>
+    <tr><td>A 探索包</td><td>EC</td><td>宇宙電路拼圖（Electric Circuit）</td></tr>
+    <tr><td>A 探索包</td><td>PH</td><td>幻影輪（Phenakistoscope）</td></tr>
+    <tr><td>A 探索包</td><td>RR</td><td>勒洛火箭車（Reuleaux Rocket）</td></tr>
+    <tr><td>A 探索包</td><td>IP</td><td>圖像詩（Image Poetry）</td></tr>
+    <tr><td>A 探索包</td><td>ZO</td><td>縮放儀（Zoom）</td></tr>
+    <tr><td>A 探索包</td><td>GA</td><td>生成藝術（Generative Art）</td></tr>
+    <tr><td>A 探索包</td><td>FL</td><td>漂浮結構（Float）</td></tr>
+    <tr><td>A 探索包</td><td>SB</td><td>星座景觀盒（Star Box）</td></tr>
+    <tr><td>A 探索包</td><td>GB</td><td>高爾頓板（Galton Board）</td></tr>
+    <tr><td>B 小專題</td><td>LF</td><td>直線花（Line Flower）</td></tr>
+    <tr><td>B 小專題</td><td>KT</td><td>中單位風箏</td></tr>
+    <tr><td>B 小專題</td><td>IS</td><td>—</td></tr>
+  </table>
+
+  <div class="callout">
+    <strong>新增主題時：</strong>到 Excel 模板「編碼規則」分頁加一行，避免後人重複。
+  </div>
+</section>
+
+<!-- 4. 流程 -->
+<section class="section">
+  <h2><span class="num">4</span>新增 SKU 的標準流程</h2>
+
+  <div class="step-box">
+    <div class="step-title">Step 1 · 判斷類型</div>
+    判斷這個東西是 <strong>成品 / 元件 / 通用材料</strong>，依本手冊第 1 節的判斷流程。
+  </div>
+
+  <div class="step-box">
+    <div class="step-title">Step 2 · 判斷類別</div>
+    從 9 個類別字母（A、B、C、D、F、G、M、R、E）挑一個最符合的。不確定 → 問主管。
+  </div>
+
+  <div class="step-box">
+    <div class="step-title">Step 3 · 編號</div>
+    依該類別的編碼格式（見第 2 節表格），找下一個流水號。<br>
+    若是 A 或 B 類元件，先確認該主題的整套是否已建（A-XX-000 / B-XX-000）。沒有的話先建整套，再建元件。
+  </div>
+
+  <div class="step-box">
+    <div class="step-title">Step 4 · 寫進 SKU 主檔</div>
+    打開 Google Sheets「SKU 主檔」，新增一列，填齊：<br>
+    <div class="form-sample">
+      SKU、品名、類型、用途、安全庫存、單位、每箱數量、狀態（活躍）、備註
+    </div>
+  </div>
+
+  <div class="step-box">
+    <div class="step-title">Step 5 · 若是成品（A-XX-000 或 B-XX-000）</div>
+    補建 BOM 表：到「BOM」分頁，把這個成品的元件用量列出。
+  </div>
+</section>
+
+<!-- 5. 範例 -->
+<section class="section">
+  <h2><span class="num">5</span>範例：完整的「風箏探索包」怎麼編</h2>
+
+  <p>假設要建一個全新的「風箏探索包」(A-KT)，先建整套成品，再依序建 9 個元件：</p>
+
+  <table>
+    <tr><th>SKU</th><th>品名</th><th>類型</th><th>用途</th></tr>
+    <tr><td>A-KT-000</td><td>風箏探索包(整套)</td><td>成品</td><td>探索包</td></tr>
+    <tr><td>A-KT-001</td><td>風箏_學習日誌</td><td>元件</td><td>探索包</td></tr>
+    <tr><td>A-KT-002</td><td>風箏_手冊</td><td>元件</td><td>探索包</td></tr>
+    <tr><td>A-KT-003</td><td>風箏_底卡</td><td>元件</td><td>探索包</td></tr>
+    <tr><td>A-KT-004</td><td>風箏_模板紙</td><td>元件</td><td>探索包</td></tr>
+    <tr><td>A-KT-005</td><td>風箏_棉線（特訂）</td><td>元件</td><td>探索包</td></tr>
+    <tr><td>A-KT-006</td><td>風箏_麻繩 30 米（特訂）</td><td>元件</td><td>探索包</td></tr>
+    <tr><td>A-KT-007</td><td>風箏_薄棉紙（黃）</td><td>元件</td><td>探索包</td></tr>
+    <tr><td>A-KT-008</td><td>風箏_薄棉紙（藍）</td><td>元件</td><td>探索包</td></tr>
+    <tr><td>A-KT-009</td><td>風箏_紙吸管</td><td>元件</td><td>探索包</td></tr>
+  </table>
+
+  <p style="margin-top:5mm">接著到「BOM」分頁，登錄組裝關係：</p>
+  <table>
+    <tr><th>成品</th><th>原料</th><th class="num">用量</th><th>單位</th></tr>
+    <tr><td>A-KT-000</td><td>A-KT-001</td><td class="num">1</td><td>本</td></tr>
+    <tr><td>A-KT-000</td><td>A-KT-002</td><td class="num">1</td><td>本</td></tr>
+    <tr><td>A-KT-000</td><td>A-KT-005</td><td class="num">1</td><td>條</td></tr>
+    <tr><td>A-KT-000</td><td>A-KT-006</td><td class="num">1</td><td>捆</td></tr>
+    <tr><td>A-KT-000</td><td>A-KT-007</td><td class="num">2</td><td>張</td></tr>
+    <tr><td>A-KT-000</td><td>A-KT-009</td><td class="num">4</td><td>根</td></tr>
+  </table>
+</section>
+
+<!-- 6. 常見錯誤 -->
+<section class="section">
+  <h2><span class="num">6</span>常見錯誤與避免方法</h2>
+
+  <div class="callout callout-danger">
+    <strong>❌ 錯誤 1：</strong>同一物編兩次<br>
+    例：剪刀已有 F-001，新人不查就又編成 F-005。<br>
+    <strong>避免：</strong>新增前先用 Sheets 的「資料 → 篩選器」搜尋品名，確認沒有舊編號。
+  </div>
+
+  <div class="callout callout-danger">
+    <strong>❌ 錯誤 2：</strong>類型混淆<br>
+    例：把「整套探索包」編成元件，或把「七巧板」編成行政文具。<br>
+    <strong>避免：</strong>嚴守第 1 節的判斷流程。
+  </div>
+
+  <div class="callout callout-danger">
+    <strong>❌ 錯誤 3：</strong>序號跳號<br>
+    例：A-KT-001 之後直接編 A-KT-005。<br>
+    <strong>避免：</strong>序號連續，跳號通常是有東西沒登。
+  </div>
+
+  <div class="callout callout-danger">
+    <strong>❌ 錯誤 4：</strong>建 A-XX-001 但忘了建 A-XX-000<br>
+    例：直接建風箏元件，但沒先建「整套」。<br>
+    <strong>避免：</strong>新主題一律先建 -000 整套，再建 -001 起跳的元件。
+  </div>
+
+  <div class="callout callout-success">
+    <strong>✓ 正確習慣：</strong><br>
+    1. 編碼前一律查現有清單<br>
+    2. 不確定時問主管，不要硬猜<br>
+    3. 建完一個 SKU 後，順手在「編碼規則」分頁更新主題碼清單<br>
+    4. 每月跟主管 review 一次新增的 SKU
+  </div>
+
+  <div class="sig-block">
+    <div class="sig">編碼負責人簽章</div>
+    <div class="sig">主管簽核 / 日期</div>
+  </div>
+</section>
+
+</body>
+</html>

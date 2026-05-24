@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>倉儲管理標準作業流程 SOP · Numeracy Lab</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm 18mm 16mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    font-family: "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+    color: #0f172a;
+    font-size: 11.5pt;
+    line-height: 1.6;
+    background: #fafaf9;
+  }
+  body { max-width: 210mm; margin: 0 auto; padding: 16mm; }
+  @media print { body { padding: 0; background: white; } .no-print { display: none; } .sop { box-shadow: none; border: 0; padding: 0; } }
+
+  .cover {
+    text-align: center;
+    padding: 40mm 0 20mm;
+    page-break-after: always;
+  }
+  .cover h1 { font-size: 28pt; font-weight: 700; margin-bottom: 8mm; }
+  .cover .sub { font-size: 13pt; color: #64748b; margin-bottom: 16mm; }
+  .cover .meta { font-size: 10pt; color: #94a3b8; }
+  .cover .toc {
+    text-align: left;
+    margin: 20mm auto;
+    max-width: 140mm;
+    border: 1px solid #e2e8f0;
+    border-radius: 4pt;
+    padding: 10mm 14mm;
+    background: white;
+  }
+  .cover .toc-title { font-size: 13pt; font-weight: 600; margin-bottom: 4mm; }
+  .cover .toc li { list-style: none; padding: 2mm 0; border-bottom: 1px dashed #e2e8f0; font-size: 11pt; }
+  .cover .toc li:last-child { border-bottom: 0; }
+  .cover .toc li span { color: #64748b; margin-right: 4mm; }
+
+  .sop {
+    page-break-before: always;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 4pt;
+    padding: 10mm 14mm;
+    margin-bottom: 10mm;
+  }
+  .sop:first-of-type { page-break-before: auto; }
+
+  .sop h2 {
+    font-size: 17pt;
+    font-weight: 700;
+    padding-bottom: 4mm;
+    margin-bottom: 4mm;
+    border-bottom: 2px solid #0f172a;
+  }
+  .sop h2 .num {
+    display: inline-block;
+    background: #0f172a;
+    color: white;
+    padding: 1mm 3mm;
+    border-radius: 2pt;
+    font-size: 12pt;
+    margin-right: 4mm;
+    vertical-align: middle;
+  }
+
+  .meta-row {
+    display: flex;
+    gap: 6mm;
+    margin-bottom: 6mm;
+    font-size: 10pt;
+    color: #64748b;
+  }
+  .meta-row span strong { color: #0f172a; font-weight: 500; }
+
+  h3 {
+    font-size: 12.5pt;
+    font-weight: 600;
+    margin: 5mm 0 2mm;
+    color: #0f172a;
+  }
+  h3::before {
+    content: "";
+    display: inline-block;
+    width: 3mm;
+    height: 3mm;
+    background: #059669;
+    border-radius: 50%;
+    margin-right: 2mm;
+    vertical-align: middle;
+  }
+
+  p { margin-bottom: 2mm; }
+
+  ol, ul { padding-left: 6mm; margin-bottom: 4mm; }
+  ol li, ul li { margin-bottom: 1.5mm; }
+
+  .step-box {
+    background: #f8fafc;
+    border-left: 3px solid #0f172a;
+    padding: 3mm 5mm;
+    margin-bottom: 3mm;
+    border-radius: 0 2pt 2pt 0;
+  }
+  .step-box .step-title { font-weight: 600; margin-bottom: 1mm; }
+  .step-box .step-detail { font-size: 10.5pt; color: #334155; }
+
+  table { width: 100%; border-collapse: collapse; margin: 3mm 0; font-size: 10.5pt; }
+  th, td { border: 1px solid #e2e8f0; padding: 2mm 3mm; text-align: left; vertical-align: top; }
+  th { background: #f1f5f9; font-weight: 600; }
+
+  .callout {
+    background: #fef3c7;
+    border: 1px solid #fde68a;
+    border-radius: 2pt;
+    padding: 3mm 4mm;
+    margin: 3mm 0;
+    font-size: 10.5pt;
+  }
+  .callout strong { color: #92400e; }
+
+  .callout-danger {
+    background: #fee2e2;
+    border-color: #fecaca;
+  }
+  .callout-danger strong { color: #991b1b; }
+
+  .form-sample {
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    padding: 4mm;
+    border-radius: 2pt;
+    font-family: ui-monospace, "SFMono-Regular", monospace;
+    font-size: 9.5pt;
+    color: #334155;
+    margin: 2mm 0;
+  }
+
+  .sig-block {
+    margin-top: 8mm;
+    display: flex;
+    gap: 12mm;
+    font-size: 10pt;
+  }
+  .sig-block .sig {
+    flex: 1;
+    border-top: 1px solid #0f172a;
+    padding-top: 2mm;
+    text-align: center;
+    color: #64748b;
+  }
+
+  .no-print {
+    position: fixed;
+    top: 8mm;
+    right: 8mm;
+    background: #0f172a;
+    color: white;
+    padding: 3mm 6mm;
+    border-radius: 3pt;
+    cursor: pointer;
+    font-size: 10pt;
+    box-shadow: 0 2pt 4pt rgba(0,0,0,0.1);
+  }
+</style>
+</head>
+<body>
+
+<button class="no-print" onclick="window.print()">列印為 PDF</button>
+
+<div class="cover">
+  <h1>倉儲管理標準作業流程</h1>
+  <div class="sub">Numeracy Lab 行政部 · SOP 手冊</div>
+  <div class="toc">
+    <div class="toc-title">目錄</div>
+    <ul>
+      <li><span>SOP-01</span>入庫驗收</li>
+      <li><span>SOP-02</span>加工領料出庫</li>
+      <li><span>SOP-03</span>營隊出貨</li>
+      <li><span>SOP-04</span>週期盤點</li>
+      <li><span>SOP-05</span>汰除與再版決策</li>
+    </ul>
+  </div>
+  <div class="meta">版本 v1.0 · 發行日 2026-04-22 · 文件擁有人 行政部主管</div>
+</div>
+
+<!-- SOP 01 -->
+<section class="sop">
+  <h2><span class="num">SOP-01</span>入庫驗收</h2>
+  <div class="meta-row">
+    <span><strong>適用時機：</strong>印廠/供應商送貨到任一倉點</span>
+    <span><strong>主責：</strong>倉儲 A</span>
+    <span><strong>備援：</strong>倉儲 B</span>
+  </div>
+
+  <h3>目的</h3>
+  <p>確保每批到貨的品項、數量、版次、品質與採購單一致，並即時登錄系統，作為後續庫存異動的起點。</p>
+
+  <h3>所需工具</h3>
+  <ul>
+    <li>送貨單/採購單影本</li>
+    <li>Google Sheets「庫存交易」表（電腦或平板）</li>
+    <li>箱標籤紙（A4 貼紙、標籤機）、美工刀、手機相機</li>
+  </ul>
+
+  <h3>作業步驟</h3>
+
+  <div class="step-box">
+    <div class="step-title">Step 1 · 到貨時現場核對</div>
+    <div class="step-detail">比對送貨單上「品項、數量、版次」與採購單是否一致。異常即刻以手機拍照並在送貨單上圈註。</div>
+  </div>
+
+  <div class="step-box">
+    <div class="step-title">Step 2 · 抽驗品質</div>
+    <div class="step-detail">從不同棧板隨機挑 3 箱開封，每箱抽看 3 本/組，檢查印刷瑕疵、裝訂、裁切、順序。發現問題照相留證。</div>
+  </div>
+
+  <div class="step-box">
+    <div class="step-title">Step 3 · 登錄「庫存交易」</div>
+    <div class="step-detail">
+      在 Google Sheets 新增一列：
+      <div class="form-sample">
+        日期：到貨當日<br>
+        SKU：對應教材編號（如 A101）<br>
+        類型：入庫<br>
+        來源倉：（留空）<br>
+        目的倉：實際放置倉點代碼（OF / SK / XL / LK）<br>
+        數量：送貨單實際數量（不是採購單數量）<br>
+        對應事件：印廠到貨 / 補印 / 退貨重送 等<br>
+        登錄人：自己姓名<br>
+        備註：版次、批號、異常說明
+      </div>
+    </div>
+  </div>
+
+  <div class="step-box">
+    <div class="step-title">Step 4 · 貼箱標籤並入位</div>
+    <div class="step-detail">每個紙箱（或棧板）貼上標籤，內容包含：SKU、品名、版次、批號、到貨日、目的儲位。依儲位編碼放入指定位置。</div>
+  </div>
+
+  <div class="step-box">
+    <div class="step-title">Step 5 · 異常回報</div>
+    <div class="step-detail">若數量短少/破損/版次錯誤，當日以 Line/Email 回報採購負責人並附照片。系統仍照「實際到貨數量」登錄。</div>
+  </div>
+
+  <div class="callout">
+    <strong>注意：</strong>登錄數量必須是實際進倉的數量，不是採購下單的數量。差額必須由採購另外補送或退款，不是由倉儲「少算少登」。
+  </div>
+
+  <div class="callout callout-danger">
+    <strong>禁止：</strong>未抽驗就全量上架、未登錄就先貼標、憑記憶事後補登（隔日會記錯）。
+  </div>
+
+  <div class="sig-block">
+    <div class="sig">倉儲人員簽章 / 日期</div>
+    <div class="sig">主管簽核 / 日期</div>
+  </div>
+</section>
+
+<!-- SOP 02 -->
+<section class="sop">
+  <h2><span class="num">SOP-02</span>加工領料出庫</h2>
+  <div class="meta-row">
+    <span><strong>適用時機：</strong>1 月、6 月加工期間，從倉點領出原料進行打包</span>
+    <span><strong>主責：</strong>倉儲 A</span>
+    <span><strong>備援：</strong>倉儲 B</span>
+  </div>
+
+  <h3>目的</h3>
+  <p>確保加工期間的領料、加工、剩料退庫全程可追溯，避免「領出後不知去向」的黑箱。</p>
+
+  <h3>作業步驟</h3>
+
+  <div class="step-box">
+    <div class="step-title">Step 1 · 產出加工排程表</div>
+    <div class="step-detail">由主管於加工期前 3 天提供加工排程（哪幾天做哪些 SKU、預計加工數量）。倉儲依此表準備領料。</div>
+  </div>
+
+  <div class="step-box">
+    <div class="step-title">Step 2 · 調撥領料</div>
+    <div class="step-detail">
+      從原倉（如 XL 信利達）調到加工區（OF 公司儲藏室）。登錄「庫存交易」：
+      <div class="form-sample">
+        類型：調撥 ／ 來源倉：XL ／ 目的倉：OF<br>
+        數量：當次領出量（不要預留多領）<br>
+        對應事件：加工打包
+      </div>
+    </div>
+  </div>
+
+  <div class="step-box">
+    <div class="step-title">Step 3 · 加工完成後登錄</div>
+    <div class="step-detail">
+      若加工後的成品是新的 SKU（如原料書冊+配件組合成「探索包」），要：<br>
+      a. 在【SKU 主檔】新增成品 SKU（例：A103-Pack）<br>
+      b. 登錄「庫存交易」一筆出庫（原料消耗）<br>
+      c. 登錄「庫存交易」一筆入庫（成品入庫）<br>
+      若加工只是打包、不改變品項，則不需新增 SKU，只改備註。
+    </div>
+  </div>
+
+  <div class="step-box">
+    <div class="step-title">Step 4 · 剩料退庫</div>
+    <div class="step-detail">加工完成當日，剩餘未用的原料必須調撥回原倉或指定倉。登錄「庫存交易」：類型=調撥，方向相反。</div>
+  </div>
+
+  <div class="callout">
+    <strong>原則：</strong>加工區不是庫存區。加工期結束後 3 天內，OF 應清零或只剩少量週轉用品。
+  </div>
+
+  <div class="sig-block">
+    <div class="sig">倉儲人員簽章 / 日期</div>
+    <div class="sig">主管簽核 / 日期</div>
+  </div>
+</section>
+
+<!-- SOP 03 -->
+<section class="sop">
+  <h2><span class="num">SOP-03</span>營隊出貨</h2>
+  <div class="meta-row">
+    <span><strong>適用時機：</strong>冬令營（2 月）、夏令營（7-8 月）出貨</span>
+    <span><strong>主責：</strong>倉儲 A</span>
+    <span><strong>協作：</strong>課務組</span>
+  </div>
+
+  <h3>目的</h3>
+  <p>確保營隊現場收到的教材品項與數量正確；同時掌握實際使用率，作為下期印量決策依據。</p>
+
+  <h3>作業步驟</h3>
+
+  <div class="step-box">
+    <div class="step-title">Step 1 · 產出出貨清單（營期前 2 週）</div>
+    <div class="step-detail">課務組依「學生人數 × 80%」算出預估發放量，加 5% 備份，產出出貨清單（Excel 或系統表單）。主管與倉儲 A 雙簽後定案。</div>
+  </div>
+
+  <div class="step-box">
+    <div class="step-title">Step 2 · 物流倉備貨</div>
+    <div class="step-detail">倉儲 A 傳出貨清單給信利達/林口物流倉對窗。物流倉回傳備貨確認照片，倉儲 A 比對清單後回簽。</div>
+  </div>
+
+  <div class="step-box">
+    <div class="step-title">Step 3 · 登錄出庫</div>
+    <div class="step-detail">
+      發車當日或次日在「庫存交易」登錄：
+      <div class="form-sample">
+        類型：出庫 ／ 來源倉：XL ／ 目的倉：（留空）<br>
+        數量：實際出貨量<br>
+        對應事件：2026冬令營 / 2026夏令營-北區
+      </div>
+    </div>
+  </div>
+
+  <div class="step-box">
+    <div class="step-title">Step 4 · 營期結束盤點與回收</div>
+    <div class="step-detail">營期結束 1 週內，請營隊現場清點未使用品並寄回。倉儲 A 收到後登錄一筆「入庫」（備註標明「營期回收」）或「調撥」到 SK/LK。填入「實際使用量」欄位，供後續分析。</div>
+  </div>
+
+  <h3>出貨清單必備欄位</h3>
+  <table>
+    <tr><th>欄位</th><th>說明</th></tr>
+    <tr><td>營期名稱</td><td>如 2026冬令營-台北場</td></tr>
+    <tr><td>SKU / 品名</td><td>對應主檔</td></tr>
+    <tr><td>預估發放量</td><td>學生數 × 80%</td></tr>
+    <tr><td>備份量</td><td>預估量 × 5%</td></tr>
+    <tr><td>出貨總量</td><td>預估+備份</td></tr>
+    <tr><td>實際使用量</td><td>營期結束後回填</td></tr>
+    <tr><td>回收量</td><td>寄回倉的量</td></tr>
+  </table>
+
+  <div class="sig-block">
+    <div class="sig">倉儲人員簽章 / 日期</div>
+    <div class="sig">課務組簽核 / 日期</div>
+  </div>
+</section>
+
+<!-- SOP 04 -->
+<section class="sop">
+  <h2><span class="num">SOP-04</span>週期盤點</h2>
+  <div class="meta-row">
+    <span><strong>適用時機：</strong>每月輪動盤、每季、每年 4 月與 10 月全倉盤</span>
+    <span><strong>主責：</strong>倉儲 A + B 雙人制</span>
+  </div>
+
+  <h3>盤點節奏</h3>
+  <table>
+    <tr><th>頻率</th><th>對象</th><th>方式</th><th>差異容忍</th></tr>
+    <tr><td>每月</td><td>A 類教材 1/3</td><td>輪動盤（3 個月走完一輪）</td><td>≤ 1%</td></tr>
+    <tr><td>每季</td><td>B、C 類</td><td>全量盤點</td><td>≤ 3%</td></tr>
+    <tr><td>每年 4 月、10 月</td><td>四倉全面</td><td>全倉停動 2 天，逐倉清點</td><td>≤ 1%</td></tr>
+  </table>
+
+  <h3>作業步驟</h3>
+
+  <div class="step-box">
+    <div class="step-title">Step 1 · 盤前準備</div>
+    <div class="step-detail">盤點前一日凍結該倉進出貨作業。列印當前「庫存交易」的帳面快照（各 SKU × 倉點現況）。</div>
+  </div>
+
+  <div class="step-box">
+    <div class="step-title">Step 2 · 雙人盤點</div>
+    <div class="step-detail">A 人唱數（一箱一箱報）、B 人登錄在盤點表；結束後兩人角色互換複盤一次。</div>
+  </div>
+
+  <div class="step-box">
+    <div class="step-title">Step 3 · 填寫【盤點紀錄】</div>
+    <div class="step-detail">
+      <div class="form-sample">
+        盤點日、SKU、倉點、帳面數（列印的快照）、實際數、差異（自動公式）、盤點人、備註
+      </div>
+    </div>
+  </div>
+
+  <div class="step-box">
+    <div class="step-title">Step 4 · 差異處理</div>
+    <div class="step-detail">
+      差異 &gt; 容忍值 → 原因調查（找送錯、漏登、竊損、破損）。<br>
+      若確認差異為真 → 在「庫存交易」登錄一筆類型=盤點調整，用入庫/出庫方向表示多/少，備註寫「盤點差異調整」。
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>要點：</strong>盤點調整不是「把帳改成對」的捷徑，是最後手段。先查原因，沒查到才調帳。
+  </div>
+
+  <div class="sig-block">
+    <div class="sig">盤點人 A / 日期</div>
+    <div class="sig">盤點人 B / 日期</div>
+  </div>
+</section>
+
+<!-- SOP 05 -->
+<section class="sop">
+  <h2><span class="num">SOP-05</span>汰除與再版決策</h2>
+  <div class="meta-row">
+    <span><strong>適用時機：</strong>每季月會</span>
+    <span><strong>主責：</strong>行政部主管</span>
+    <span><strong>協作：</strong>倉儲 A、課務組</span>
+  </div>
+
+  <h3>目的</h3>
+  <p>讓庫存保持健康週轉率，避免倉租浪費在呆滯品上；同時避免主力教材在營期前缺貨。</p>
+
+  <h3>月會議程（建議 30 分鐘）</h3>
+  <ol>
+    <li>開啟儀表板「呆滯品」頁 → 檢視三類清單：停產中、&gt;12 個月未動、低週轉過量</li>
+    <li>逐項決議處置動作（捐贈、折扣清倉、銷毀、繼續持有）</li>
+    <li>開啟「儀表板」首頁 → 檢視庫存警示 → 對每個 🔴 品項決議是否再印</li>
+    <li>主管簽核決議後，由倉儲執行並登錄</li>
+  </ol>
+
+  <h3>決議準則</h3>
+  <table>
+    <tr><th>狀況</th><th>建議動作</th></tr>
+    <tr><td>停產且庫存 &gt; 0</td><td>捐贈偏鄉學校 / 折價清倉 / 銷毀（按品項價值決定）</td></tr>
+    <tr><td>&gt;12 個月未動、仍可用</td><td>下一季活動加入使用 / 納入贈品 / 清倉</td></tr>
+    <tr><td>低週轉過量（6–12 個月未動 且 &gt;安全庫存 2 倍）</td><td>下次印刷量減半</td></tr>
+    <tr><td>A 類 🔴 低於安全庫存</td><td>營期前 60 天內立即啟動再印採購</td></tr>
+    <tr><td>A 類 🟡 接近下限</td><td>追蹤 2 週，若持續下降則啟動再印</td></tr>
+  </table>
+
+  <h3>執行後動作</h3>
+  <ul>
+    <li>捐贈/銷毀：登錄「庫存交易」一筆出庫，備註「捐贈-單位名稱」或「銷毀-憑證編號」</li>
+    <li>再印：由採購對接印廠，排入 SOP-01 驗收流程</li>
+    <li>會議紀錄保存於共用雲端，至少保留 3 年備查</li>
+  </ul>
+
+  <div class="sig-block">
+    <div class="sig">主管簽章 / 日期</div>
+    <div class="sig">執行人簽章 / 日期</div>
+  </div>
+</section>
+
+</body>
+</html>
