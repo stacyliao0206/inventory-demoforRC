@@ -4,11 +4,11 @@ const CONFIG = {
   demoMode: true,
 
   sheets: {
-    skus: "",
-    transactions: "",
-    warehouses: "",
-    audits: "",
-    bom: ""
+    skus: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSbVbD0-h_g0nWhdw4zq48x5aRCZ00Ay2qL_JVaKlWBXAZ2ALo2IYFcC2oo0cDnMA/pub?gid=1692658489&single=true&output=csv",
+    transactions: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSbVbD0-h_g0nWhdw4zq48x5aRCZ00Ay2qL_JVaKlWBXAZ2ALo2IYFcC2oo0cDnMA/pub?gid=1880142183&single=true&output=csv",
+    warehouses: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSbVbD0-h_g0nWhdw4zq48x5aRCZ00Ay2qL_JVaKlWBXAZ2ALo2IYFcC2oo0cDnMA/pub?gid=167075805&single=true&output=csv",
+    audits: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSbVbD0-h_g0nWhdw4zq48x5aRCZ00Ay2qL_JVaKlWBXAZ2ALo2IYFcC2oo0cDnMA/pub?gid=469782246&single=true&output=csv",
+    bom: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSbVbD0-h_g0nWhdw4zq48x5aRCZ00Ay2qL_JVaKlWBXAZ2ALo2IYFcC2oo0cDnMA/pub?gid=849392750&single=true&output=csv"
   },
 
   camps: [
