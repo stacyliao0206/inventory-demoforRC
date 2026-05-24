@@ -1,6 +1,6 @@
 const CONFIG = {
   // 示範環境:固定讀取本地 demo 資料，不連接 Google Sheets
-  useLiveData: false,
+  useLiveData: true,
   demoMode: true,
 
   sheets: {
